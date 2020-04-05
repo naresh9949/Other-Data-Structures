@@ -27,19 +27,15 @@ node* Make_Set(int data,map<int,node*> &m)
 	m[data] = n;
 
 	return n;
-	cout<<"MAked"<<endl;
 }
 
 int Find(node *n)
 {
-	//node p = n->parent;
-
 	if(n->parent==n)
 		return n->data;
 	else
-		return Find(n->parent);
+		return n->parent=Find(n->parent);
 
-	return -1;
 }
 
 void Union(node* n1,node* n2,std::map<int, node*> &m)
