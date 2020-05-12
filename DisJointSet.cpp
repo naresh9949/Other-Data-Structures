@@ -1,10 +1,3 @@
-/*
-	Disjoint-set Data Structure
-	Operations:
-				1.makeset
-				2.find
-				3.union 
-*/
 #include<iostream>
 #include<map>
 using namespace std;
@@ -29,19 +22,23 @@ node* Make_Set(int data,map<int,node*> &m)
 	return n;
 }
 
-int Find(node *n)
+node* Find(node *n)
 {
 	if(n->parent==n)
-		return n->data;
+		return n;
 	else
-		return n->parent=Find(n->parent);
+		return n->parent = Find(n->parent);
 
 }
 
 void Union(node* n1,node* n2,std::map<int, node*> &m)
 {
-	int p1 = Find(n1);
-	int p2 = Find(n2);
+    node* pone = Find(n1);
+    node* ptwo = Find(n2);
+    
+    
+	int p1 = pone->data;
+	int p2 = ptwo->data;
 
 	if(p1==p2)
 		return ;
@@ -68,13 +65,13 @@ int main()
 	Make_Set(5,m);
 	Make_Set(6,m);
 
-	if(Find(m[1])!=-1)
-		cout<<"S"<<endl;
+
 	Union(m[1],m[2],m);
 	Union(m[2],m[3],m);
-	Union(m[1],m[6],m);
 	Union(m[3],m[5],m);
+	
+	node* p = Find(m[4]);
 
-	cout<<Find(m[5])<<endl;
+	cout<<p->data<<endl;
 
 }
